@@ -1,86 +1,11 @@
 <header>
-  <mdb-sidenav-layout>
-
-    <mdb-sidenav #sidenav="mdbSidenav" [expandOnHover]="true" [closeOnEsc]="false" [slim]="true" [slimCollapsed]="true"
-      [mode]="'push'" [hidden]="false" [backdrop]="true" [position]="'relative'" [color]="'dark'"
-      class="fixed-top sidenav-margin">
-
-      <ul class="sidenav-menu border border-dark rounded-3">
-
-        <mdb-sidenav-item>
-          <a class="sidenav-link">
-            <i class="fas fa-cogs fa-fw me-3"></i><span slim="false">Link 1</span></a>
-        </mdb-sidenav-item>
-
-        <mdb-sidenav-item>
-          <a class="sidenav-link">
-            <i class="fas fa-bullhorn fa-fw me-3"></i><span slim="false">Link 2</span></a>
-        </mdb-sidenav-item>
-
-        <mdb-sidenav-item>
-          <a class="sidenav-link">
-            <i class="fas fa-search fa-fw me-3"></i><span slim="false">Link 3</span></a>
-        </mdb-sidenav-item>
-
-        <mdb-sidenav-item>
-          <a class="sidenav-link">
-            <i class="far fa-meh fa-fw me-3"></i><span slim="false">Link 4</span></a>
-        </mdb-sidenav-item>
-
-        <mdb-sidenav-item>
-          <a class="sidenav-link">
-            <i class="fas fa-poo fa-fw me-3"></i><span slim="false">Link 5</span></a>
-        </mdb-sidenav-item>
-
-        <!-- collapse example
-        <mdb-sidenav-item>
-          <a class="sidenav-link"><i class="fas fa-grin fa-fw me-3"></i><span slim="false">Category
-              1</span></a>
-          <ul class="sidenav-collapse" mdbCollapse>
-            <li class="sidenav-item">
-              <a class="sidenav-link">Link 2</a>
-            </li>
-            <li class="sidenav-item">
-              <a class="sidenav-link">Link 3</a>
-            </li>
-          </ul>
-        </mdb-sidenav-item>
-        -->
-
-      </ul>
-    </mdb-sidenav>
-
-    <mdb-sidenav-content #sidenavContent>
-      <!-- Toggler -->
-      <!--
-    <button #sidenavToggle class="btn btn-primary" (click)="sidenav.toggle()">
-      <i class="fas fa-bars"></i>
-    </button>
-    -->
-      <!-- Toggler -->
-      <!-- disable 
-              <button #sidenavToggle class="btn btn-primary" (click)="sidenav.toggleSlim()">
-                  toggle slim
-              </button>
-              done disable -->
-    </mdb-sidenav-content>
-
-  </mdb-sidenav-layout>
-
-  <div class="container">
-    <nav class="navbar fixed-top navbar-dark bg-dark">
-      <div class="container-fluid shadow-5">
-        <a class="navbar-brand" href="#"><img src="assets/logo.png" width="180" height="44"
-            class="d-inline-block align-left" alt=""></a>
-      </div>
-    </nav>
-    <br>
-  </div>
-
+  <app-nav-side></app-nav-side>
+  <app-nav-top></app-nav-top>
 </header>
 
 <main>
   <div class="container" style="margin-left: 10px; margin-top: 70px;">
+    <h2>Test it.</h2>
     <h2>fixed Navbar top with fixed SideNav flyout on left</h2>
     <br>
     <h5>
@@ -115,6 +40,30 @@
       accompanied by
       English versions from the 1914 translation by H. Rackham.
     </h5>
+    <div style="height: 1000px"></div>
+
+    <h5>
+      Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin
+      literature
+      from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in
+      Virginia,
+      looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the
+      cites of
+      the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and
+      1.10.33
+      of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a
+      treatise
+      on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor
+      sit
+      amet..", comes from a line in section 1.10.32.
+
+      The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32
+      and
+      1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form,
+      accompanied by
+      English versions from the 1914 translation by H. Rackham.
+    </h5>
+
     <div style="height: 1000px"></div>
   </div>
 
