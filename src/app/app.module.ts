@@ -37,14 +37,17 @@ import { MdbTimepickerModule } from 'mdb-angular-ui-kit/timepicker';
 import { MdbTooltipModule } from 'mdb-angular-ui-kit/tooltip';
 import { MdbValidationModule } from 'mdb-angular-ui-kit/validation';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 import { NavTopComponent } from './nav-top/nav-top.component';
 import { NavSideComponent } from './nav-side/nav-side.component';
+import { LoginComponent } from './pages/login/login.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavTopComponent,
-    NavSideComponent
+    NavSideComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
