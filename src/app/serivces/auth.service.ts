@@ -10,15 +10,18 @@ export class AuthService {
   private _userData = new BehaviorSubject<object>({});
   private _loggedIn = new BehaviorSubject<boolean>(false);
 
-  constructor(private router: Router,
-    private apiService: ApiService) {
-
-  }
-
   public userData$ = this._userData.asObservable();
   public loggedIn$ = this._loggedIn.asObservable();
 
-  error: string = "";
+  public error: string = "";
+
+  constructor(private router: Router, private apiService: ApiService) {
+  }
+
+  private updateSubjects(state: boolean, userData: object) {
+    this._loggedIn.next(state);
+    this._userData.next(userData);
+  }
 
   getToken() {
     return !!localStorage.getItem("admin-token");
@@ -31,37 +34,35 @@ export class AuthService {
     this.router.navigateByUrl("/login");
   }
 
-  login(loginData: any) {
-    // const loginData = this.loginForm.value;
+  login(loginData: any, landingPage: string = '/home'): Promise<any> {
+    return new Promise((resolve, reject) => {
 
-    console.log(loginData);
-
-    this.apiService.postApi('/auth', loginData).subscribe(
-      (loginResponse: any) => {
-
-        console.log(loginResponse);
-
+      this.apiService.postApi('/auth', loginData).subscribe((loginResponse: any) => {
         if (loginResponse?.auth) {
+
           localStorage.setItem('admin-token', loginResponse.token);
           localStorage.setItem('admin-data', JSON.stringify(loginResponse.result));
 
-          this.error = "";
+          this.updateSubjects(true, loginResponse.result);
 
-          this._loggedIn.next(true);
-          this._userData.next(loginResponse.result)
+          this.router.navigate([landingPage]);
 
-          this.router.navigate(['/support-chat']);
+          resolve(loginResponse);
         } else {
           this.error = loginResponse.message;
 
-          this._loggedIn.next(false);
-          this._userData.next({});
+          this.updateSubjects(false, {});
 
-          console.log('error ===> ', this.error);
+          reject(loginResponse);
         }
-      }
-    );
 
+      },
+
+        (error) => {
+          reject(error)
+        });
+
+    });
   }
 
 }

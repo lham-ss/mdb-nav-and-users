@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -41,16 +42,21 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavTopComponent } from './nav-top/nav-top.component';
 import { NavSideComponent } from './nav-side/nav-side.component';
 import { LoginComponent } from './pages/login/login.component';
+import { HomeComponent } from './pages/home/home.component';
+import { AlertBasicComponent } from './alert/alert-basic/alert-basic.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavTopComponent,
     NavSideComponent,
-    LoginComponent
+    LoginComponent,
+    HomeComponent,
+    AlertBasicComponent
   ],
   imports: [
     BrowserModule,
+    ReactiveFormsModule,
     AppRoutingModule,
     MdbAccordionModule,
     MdbAutocompleteModule,
