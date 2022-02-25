@@ -28,7 +28,8 @@
             </div>
         </div>
 
-        <button [disabled]="!loginForm.valid" class="btn btn-block text-center my-3">Log in</button>
+        <button [disabled]="loginForm.invalid && loginForm.touched" class="btn btn-block text-center my-3">Log
+            in</button>
 
         <div class="text-center pt-3 text-muted">This is a private web application. Contact your system admin for more
             details.</div>

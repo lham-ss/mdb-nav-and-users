@@ -31,6 +31,8 @@ export class AuthService {
     localStorage.removeItem("admin-token");
     localStorage.removeItem("admin-data");
 
+    this.updateSubjects(false, {});
+
     this.router.navigateByUrl("/login");
   }
 
@@ -63,6 +65,18 @@ export class AuthService {
         });
 
     });
+  }
+
+
+  // handle browser refresh to keep login state
+  refresh() {
+    let token = localStorage.getItem('admin-token');
+
+    if (!token) {
+      this.updateSubjects(false, {});
+      return;
+    }
+
   }
 
 }

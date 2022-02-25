@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../serivces/auth.service';
 
 @Component({
   selector: 'app-nav-top',
@@ -6,10 +7,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./nav-top.component.scss']
 })
 export class NavTopComponent implements OnInit {
+  public isLoggedIn: boolean = false;
 
-  constructor() { }
+  constructor(private auth: AuthService) { }
 
   ngOnInit(): void {
+    this.auth.loggedIn$.subscribe(val => this.isLoggedIn = val);
+  }
+
+  logout(): void {
+    this.auth.logout();
   }
 
 }
