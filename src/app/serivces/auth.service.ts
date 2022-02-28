@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { ApiService } from './api.service';
 
 @Injectable({
@@ -24,12 +24,12 @@ export class AuthService {
   }
 
   getToken() {
-    return !!localStorage.getItem("admin-token");
+    return !!localStorage.getItem("user-token");
   }
 
   logout() {
-    localStorage.removeItem("admin-token");
-    localStorage.removeItem("admin-data");
+    localStorage.removeItem("user-token");
+    localStorage.removeItem("user-data");
 
     this.updateSubjects(false, {});
 
@@ -42,8 +42,8 @@ export class AuthService {
       this.apiService.postApi('/auth', loginData).subscribe((loginResponse: any) => {
         if (loginResponse?.auth) {
 
-          localStorage.setItem('admin-token', loginResponse.token);
-          localStorage.setItem('admin-data', JSON.stringify(loginResponse.result));
+          localStorage.setItem('user-token', loginResponse.token);
+          localStorage.setItem('user-data', JSON.stringify(loginResponse.result));
 
           this.updateSubjects(true, loginResponse.result);
 
@@ -70,7 +70,7 @@ export class AuthService {
 
   // handle browser refresh to keep login state
   refresh() {
-    let token = localStorage.getItem('admin-token');
+    let token = localStorage.getItem('user-token');
 
     if (!token) {
       this.updateSubjects(false, {});

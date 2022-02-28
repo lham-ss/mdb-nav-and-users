@@ -1,1 +1,23 @@
-<p>home works!</p>
+<div class="container d-flex align-items-center justify-content-center" style="margin-top: 15%;">
+
+    <div class="card" style="width: 400px;">
+        <div class="card-body">
+            <h5 class="card-title">Welcome </h5>
+            <h6 class="card-subtitle mb-2 text-muted">You are now authenticated.</h6>
+            <p class="card-text">
+                Some quick example text to build on the card title and make up the bulk of the
+                card's content.
+            </p>
+            <!--
+            <a href="#" class="card-link">Card link</a>
+            <a href="#" class="card-link">Another link</a>
+            -->
+            <button (click)="testButton($event)" class="btn btn-sm btn-secondary">Test JWT</button>
+        </div>
+    </div>
+
+    <div *ngIf="testResults != null">
+        {{ testResults | json }}
+    </div>
+
+</div>
