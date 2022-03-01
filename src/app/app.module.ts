@@ -45,6 +45,8 @@ import { LoginComponent } from './pages/login/login.component';
 import { HomeComponent } from './pages/home/home.component';
 import { AlertBasicComponent } from './alert/alert-basic/alert-basic.component';
 
+import { authInterceptorProviders } from './_helpers/auth.interceptor';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -93,7 +95,7 @@ import { AlertBasicComponent } from './alert/alert-basic/alert-basic.component';
     MdbValidationModule,
     BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [authInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { ApiService } from './api.service';
+import { TokenService } from './token.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,24 +16,23 @@ export class AuthService {
 
   public error: string = "";
 
-  constructor(private router: Router, private apiService: ApiService) {
+  constructor(private router: Router, private apiService: ApiService, private tokenStorage: TokenService) {
   }
 
-  private updateSubjects(state: boolean, userData: object) {
+  private updateSubjects(state: boolean, userData: object = {}) {
     this._loggedIn.next(state);
     this._userData.next(userData);
+
+    this.tokenStorage.saveUser(userData);
   }
 
-  getToken() {
-    return !!localStorage.getItem("user-token");
+  getTokenStatus() {
+    return !!this.tokenStorage.getToken();
   }
 
   logout() {
-    localStorage.removeItem("user-token");
-    localStorage.removeItem("user-data");
-
-    this.updateSubjects(false, {});
-
+    this.tokenStorage.signOut();
+    this.updateSubjects(false);
     this.router.navigateByUrl("/login");
   }
 
@@ -42,9 +42,8 @@ export class AuthService {
       this.apiService.postApi('/auth', loginData).subscribe((loginResponse: any) => {
         if (loginResponse?.auth) {
 
-          localStorage.setItem('user-token', loginResponse.token);
-          localStorage.setItem('user-data', JSON.stringify(loginResponse.result));
-
+          this.tokenStorage.saveToken(loginResponse.accessToken);
+          // this.tokenStorage.saveRefreshToken(loginResponse.refreshToken);
           this.updateSubjects(true, loginResponse.result);
 
           this.router.navigate([landingPage]);
@@ -52,31 +51,20 @@ export class AuthService {
           resolve(loginResponse);
         } else {
           this.error = loginResponse.message;
-
-          this.updateSubjects(false, {});
-
+          this.updateSubjects(false);
           reject(loginResponse);
         }
 
       },
 
         (error) => {
+          this.error = error.message;
+          this.updateSubjects(false);
           reject(error)
         });
 
     });
   }
 
-
-  // handle browser refresh to keep login state
-  refresh() {
-    let token = localStorage.getItem('user-token');
-
-    if (!token) {
-      this.updateSubjects(false, {});
-      return;
-    }
-
-  }
 
 }
