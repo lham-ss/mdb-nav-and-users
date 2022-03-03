@@ -16,8 +16,11 @@ export class AuthService {
 
   public error: string = "";
 
-  constructor(private router: Router, private apiService: ApiService, private tokenStorage: TokenService) {
-  }
+  constructor(
+    private router: Router,
+    private apiService: ApiService,
+    private tokenStorage: TokenService
+  ) { }
 
   private updateSubjects(state: boolean, userData: object = {}) {
     this._loggedIn.next(state);
@@ -30,32 +33,42 @@ export class AuthService {
     return !!this.tokenStorage.getToken();
   }
 
+  getLoggedIn() {
+    return this._loggedIn.getValue();
+  }
+
   logout() {
-    this.tokenStorage.signOut();
     this.updateSubjects(false);
+
+    this.tokenStorage.signOut();
+
     this.router.navigateByUrl("/login");
   }
 
   login(loginData: any, landingPage: string = '/home'): Promise<any> {
     return new Promise((resolve, reject) => {
 
-      this.apiService.postApi('/auth', loginData).subscribe((loginResponse: any) => {
-        if (loginResponse?.auth) {
+      this.apiService.postApi('/auth', loginData).subscribe(
+        (loginResponse: any) => {
+          if (loginResponse?.accessToken) {
 
-          this.tokenStorage.saveToken(loginResponse.accessToken);
-          // this.tokenStorage.saveRefreshToken(loginResponse.refreshToken);
-          this.updateSubjects(true, loginResponse.result);
+            this.tokenStorage.saveToken(loginResponse.accessToken);
+            this.tokenStorage.saveRefreshToken(loginResponse.refreshToken || "coming soon");
 
-          this.router.navigate([landingPage]);
+            this.updateSubjects(true, loginResponse);
 
-          resolve(loginResponse);
-        } else {
-          this.error = loginResponse.message;
-          this.updateSubjects(false);
-          reject(loginResponse);
-        }
+            this.router.navigate([landingPage]);
 
-      },
+            resolve(loginResponse);
+          } else {
+            this.error = loginResponse.message;
+
+            this.updateSubjects(false);
+
+            reject(loginResponse);
+          }
+
+        },
 
         (error) => {
           this.error = error.message;
@@ -64,6 +77,14 @@ export class AuthService {
         });
 
     });
+  }
+
+  refreshState() {
+    if (this.getTokenStatus()) {
+      let user = this.tokenStorage.getUser();
+
+      if (user) this.updateSubjects(true, user);
+    }
   }
 
 

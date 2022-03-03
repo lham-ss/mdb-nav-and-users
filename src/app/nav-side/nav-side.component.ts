@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-nav-side',
@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./nav-side.component.scss']
 })
 export class NavSideComponent implements OnInit {
+  @Input('sharedData') shared!: any;
 
   constructor() { }
 

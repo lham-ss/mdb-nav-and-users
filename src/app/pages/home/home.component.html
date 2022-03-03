@@ -1,5 +1,6 @@
-<div class="container d-flex align-items-center justify-content-center" style="margin-top: 15%;">
+<div class="wrapper" style="margin-top: 75px;">
 
+    <!-- d-flex align-items-center justify-content-center -->
     <div class="card" style="width: 400px;">
         <div class="card-body">
             <h5 class="card-title">Welcome </h5>
@@ -16,8 +17,37 @@
         </div>
     </div>
 
-    <div *ngIf="testResults != null">
-        {{ testResults | json }}
+</div>
+
+<div class="wrapper">
+
+    <div class="bg-info rounded p-2 shadow" *ngIf="currentUser; else loggedOut">
+        <header class="jumbotron">
+            <h3>
+                <strong>{{ currentUser.email }}</strong> Profile
+            </h3>
+        </header>
+        <hr />
+        <p>
+            <strong>Token:</strong>
+            {{ currentUser.accessToken.substring(0, 20) }} ...
+            {{ currentUser.accessToken.substr(currentUser.accessToken.length - 20) }}
+        </p>
+        <p>
+            <strong>Email:</strong>
+            {{ currentUser.email }}
+        </p>
+        <strong>Roles:</strong>
+        <ul>
+            <li *ngFor="let role of currentUser.roles">
+                {{ role }}
+            </li>
+        </ul>
     </div>
+
+    <ng-template #loggedOut>
+        Please login.
+    </ng-template>
+
 
 </div>

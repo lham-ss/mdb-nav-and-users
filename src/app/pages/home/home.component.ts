@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/serivces/api.service';
+import { TokenService } from 'src/app/serivces/token.service';
 
 @Component({
   selector: 'app-home',
@@ -7,11 +8,15 @@ import { ApiService } from 'src/app/serivces/api.service';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  testResults = null;
+  currentUser: any;
 
-  constructor(private api: ApiService) { }
+  constructor(
+    private api: ApiService,
+    private tokens: TokenService,
+  ) { }
 
   ngOnInit(): void {
+    this.currentUser = this.tokens.getUser();
   }
 
   testButton(val: any) {

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { AuthService } from '../serivces/auth.service';
 
 @Component({
@@ -7,12 +7,12 @@ import { AuthService } from '../serivces/auth.service';
   styleUrls: ['./nav-top.component.scss']
 })
 export class NavTopComponent implements OnInit {
-  public isLoggedIn: boolean = false;
+  @Input('sharedData') shared!: any;
 
   constructor(private auth: AuthService) { }
 
   ngOnInit(): void {
-    this.auth.loggedIn$.subscribe(val => this.isLoggedIn = val);
+
   }
 
   logout(): void {

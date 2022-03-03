@@ -1,6 +1,9 @@
 <header>
-  <app-nav-side></app-nav-side>
-  <app-nav-top></app-nav-top>
+  <app-nav-side *ngIf="shared.isLoggedIn" [sharedData]="shared">
+  </app-nav-side>
+
+  <app-nav-top [sharedData]="shared">
+  </app-nav-top>
 </header>
 
 <main style="margin-left: 10px; margin-top: 70px;">

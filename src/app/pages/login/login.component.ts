@@ -7,6 +7,7 @@ import { MdbNotificationService, MdbNotificationRef } from 'mdb-angular-ui-kit/n
 import { AlertBasicComponent } from 'src/app/alert/alert-basic/alert-basic.component';
 
 import { AuthService } from 'src/app/serivces/auth.service';
+import { TokenService } from 'src/app/serivces/token.service';
 
 
 @Component({
@@ -24,7 +25,12 @@ export class LoginComponent implements OnInit {
   });
 
 
-  constructor(private auth: AuthService, private route: ActivatedRoute, private notificationService: MdbNotificationService) { }
+  constructor(
+    private auth: AuthService,
+    private route: ActivatedRoute,
+    private notificationService: MdbNotificationService,
+    private tokens: TokenService
+  ) { }
 
   ngOnInit(): void {
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/home';
@@ -42,13 +48,14 @@ export class LoginComponent implements OnInit {
     try {
       res = await this.auth.login(this.loginForm.value, this.returnUrl);
 
-      if (!res.auth) {
+      if (!res.accessToken) {
         this.openAlert('Login Error', 'Not authorized.');
       }
 
     }
-    catch (err: any) {
-      this.openAlert('Login Error', err.error.message);
+    catch (e: any) {
+      console.log(e);
+      this.openAlert('Login Error', e?.error?.message);
     }
   }
 
@@ -65,7 +72,9 @@ export class LoginComponent implements OnInit {
     };
 
     this.loginForm.disable();
+
     this.notificationRef = this.notificationService.open(AlertBasicComponent, options);
+
     this.notificationRef.onClose.subscribe(() => {
       this.loginForm.enable();
     });
