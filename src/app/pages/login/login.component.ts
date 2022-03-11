@@ -6,8 +6,8 @@ import { MdbNotificationService, MdbNotificationRef } from 'mdb-angular-ui-kit/n
 
 import { AlertBasicComponent } from 'src/app/alert/alert-basic/alert-basic.component';
 
-import { AuthService } from 'src/app/serivces/auth.service';
-import { TokenService } from 'src/app/serivces/token.service';
+import { AuthService } from 'src/app/services/auth.service';
+import { TokenService } from 'src/app/services/token.service';
 
 
 @Component({

@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MdbAccordionModule } from 'mdb-angular-ui-kit/accordion';
@@ -47,6 +49,8 @@ import { AlertBasicComponent } from './alert/alert-basic/alert-basic.component';
 
 import { authInterceptorProviders } from './_helpers/auth.interceptor';
 
+const socketIoConfig: SocketIoConfig = { url: 'ws://staffsetter.ngrok.io/', options: { transports: ['websocket'] } };
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -58,6 +62,7 @@ import { authInterceptorProviders } from './_helpers/auth.interceptor';
   ],
   imports: [
     BrowserModule,
+    SocketIoModule.forRoot(socketIoConfig),
     ReactiveFormsModule,
     AppRoutingModule,
     MdbAccordionModule,
