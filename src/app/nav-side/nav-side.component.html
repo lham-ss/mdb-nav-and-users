@@ -7,28 +7,30 @@
         <ul class="sidenav-menu border border-dark rounded-3">
 
             <mdb-sidenav-item>
-                <a class="sidenav-link">
-                    <i class="fas fa-cogs fa-fw me-3"></i><span slim="false">Link 1</span></a>
+                <a class="sidenav-link" routerLink="/home">
+                    <i class="fas fa-home fa-fw rounded me-3" [routerLinkActive]="'active-route'"></i><span slim="false"
+                        [routerLinkActive]="['active-route', 'rounded']">Home</span></a>
+            </mdb-sidenav-item>
+
+            <mdb-sidenav-item>
+                <a class="sidenav-link" routerLink="/users">
+                    <i class="fas fa-user-cog fa-fw me-3 rounded" [routerLinkActive]="'active-route'"></i><span
+                        slim="false" [routerLinkActive]="['active-route', 'rounded']">Users</span></a>
             </mdb-sidenav-item>
 
             <mdb-sidenav-item>
                 <a class="sidenav-link">
-                    <i class="fas fa-bullhorn fa-fw me-3"></i><span slim="false">Link 2</span></a>
+                    <i class="fas fa-search fa-fw me-3 rounded"></i><span slim="false">Targets</span></a>
             </mdb-sidenav-item>
 
             <mdb-sidenav-item>
                 <a class="sidenav-link">
-                    <i class="fas fa-search fa-fw me-3"></i><span slim="false">Link 3</span></a>
+                    <i class="far fa-meh fa-fw me-3 rounded"></i><span slim="false">Templates</span></a>
             </mdb-sidenav-item>
 
             <mdb-sidenav-item>
                 <a class="sidenav-link">
-                    <i class="far fa-meh fa-fw me-3"></i><span slim="false">Link 4</span></a>
-            </mdb-sidenav-item>
-
-            <mdb-sidenav-item>
-                <a class="sidenav-link">
-                    <i class="fas fa-poo fa-fw me-3"></i><span slim="false">Link 5</span></a>
+                    <i class="fas fa-bullhorn fa-fw me-3 rounded"></i><span slim="false">Blast</span></a>
             </mdb-sidenav-item>
 
             <!-- collapse example

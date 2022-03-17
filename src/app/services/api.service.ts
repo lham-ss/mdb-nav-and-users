@@ -13,7 +13,7 @@ export class ApiService {
   ) { }
 
   getApi(path: string) {
-    return this.http.get(this.baseApiPath + path);
+    return this.http.get<any>(this.baseApiPath + path);
   }
 
   postApi(path: string, data: object) {

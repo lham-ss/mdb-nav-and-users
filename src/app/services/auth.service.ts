@@ -87,5 +87,19 @@ export class AuthService {
     }
   }
 
+  isAdmin() {
+    if (this.getTokenStatus()) {
+      let user = this.tokenStorage.getUser();
+
+      if (user?.roles.length) {
+        for (let role of user.roles) {
+          if (role == 'ROLE_ADMIN') return true;
+        }
+      }
+    }
+
+    return false;
+  }
+
 
 }
