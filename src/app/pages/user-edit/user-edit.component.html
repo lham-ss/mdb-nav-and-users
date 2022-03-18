@@ -28,7 +28,14 @@
                             {{ data.email }}
                         </td>
                         <td>
-                            {{ data.isActive }}
+                            <span *ngIf="data.isActive else notActive;" class="text-success">
+                                <i class="far fa-thumbs-up"></i>
+                            </span>
+                            <ng-template #notActive>
+                                <span class="text-danger">
+                                    <i class="fas fa-times"></i>
+                                </span>
+                            </ng-template>
                         </td>
                         <td>
                             <button class="call-btn btn btn-outline-primary btn-floating btn-sm"

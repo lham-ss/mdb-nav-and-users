@@ -54,7 +54,15 @@ export class UserEditComponent implements OnInit {
   }
 
   openUserEditModal(userData: any) {
-    this.modals.open(UserEditModalComponent, { data: userData });
+    this.modalRef = this.modals.open(UserEditModalComponent, {
+      data: {
+        user: userData,
+      }
+    });
+
+    this.modalRef.onClose.subscribe((data) => {
+      console.log('data out', data);
+    });
   }
 
 
