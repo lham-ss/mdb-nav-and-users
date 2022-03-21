@@ -6,6 +6,7 @@ import { UserEditModalComponent } from 'src/app/modals/user-edit-modal/user-edit
 import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
 
 import { ApiService } from 'src/app/services/api.service';
+import { ConfirmModalComponent } from 'src/app/modals/confirm-modal/confirm-modal.component';
 
 export interface User {
   firstName: string;
@@ -23,7 +24,8 @@ export interface User {
 export class UserEditComponent implements OnInit {
   loading: boolean = true;
   dataSource$ !: Observable<any[]>;
-  modalRef: MdbModalRef<UserEditModalComponent> | null = null;
+  userModalRef: MdbModalRef<UserEditModalComponent> | null = null;
+  confirmationModalRef: MdbModalRef<ConfirmModalComponent> | null = null;
 
   constructor(
     private api: ApiService,
@@ -31,19 +33,16 @@ export class UserEditComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.dataSource$ = this.api.getApi('/user/').pipe(
-      delay(2000),
-      map(x => x?.users),
-      tap(() => (this.loading = false))
-    );
+    this.reloadData();
   }
 
   headers = ['First Name', 'Last Name', 'Phone Number', 'Email', 'Is Active', 'Actions'];
 
   reloadData(): void {
     this.loading = true;
+
     this.dataSource$ = this.api.getApi('/user/').pipe(
-      delay(2000),
+      delay(500),
       map(x => x?.users),
       tap(() => (this.loading = false))
     );
@@ -53,15 +52,35 @@ export class UserEditComponent implements OnInit {
     console.log(data);
   }
 
+  deleteUserWithConfirmation(user: any) {
+    this.confirmationModalRef = this.modals.open(ConfirmModalComponent, {
+      data: {
+        modalTitle: 'DELETE USER?',
+        modalBody: 'Please confirm that you wish to delete user: ' + user.firstName + '...',
+      }
+    });
+
+    this.confirmationModalRef.onClose.subscribe((result: any) => {
+      if (result.confirmed) {
+        console.log('Deletion confirmed...  ')
+      }
+      else {
+        console.log('Deletion not confirmed...')
+      }
+    })
+  }
+
   openUserEditModal(userData: any) {
-    this.modalRef = this.modals.open(UserEditModalComponent, {
+    this.userModalRef = this.modals.open(UserEditModalComponent, {
       data: {
         user: userData,
       }
     });
 
-    this.modalRef.onClose.subscribe((data) => {
-      console.log('data out', data);
+    this.userModalRef.onClose.subscribe((result: any) => {
+      if (result?.reloadData) {
+        this.reloadData();
+      }
     });
   }
 

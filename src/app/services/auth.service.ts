@@ -4,6 +4,10 @@ import { BehaviorSubject } from 'rxjs';
 import { ApiService } from './api.service';
 import { TokenService } from './token.service';
 
+interface AnyObject {
+  [key: string]: any
+}
+
 @Injectable({
   providedIn: 'root'
 })

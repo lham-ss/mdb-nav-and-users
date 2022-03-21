@@ -50,6 +50,7 @@ import { AlertBasicComponent } from './alert/alert-basic/alert-basic.component';
 import { authInterceptorProviders } from './_helpers/auth.interceptor';
 import { UserEditComponent } from './pages/user-edit/user-edit.component';
 import { UserEditModalComponent } from './modals/user-edit-modal/user-edit-modal.component';
+import { ConfirmModalComponent } from './modals/confirm-modal/confirm-modal.component';
 
 const socketIoConfig: SocketIoConfig = { url: 'ws://staffsetter.ngrok.io/', options: { transports: ['websocket'] } };
 
@@ -62,7 +63,8 @@ const socketIoConfig: SocketIoConfig = { url: 'ws://staffsetter.ngrok.io/', opti
     HomeComponent,
     AlertBasicComponent,
     UserEditComponent,
-    UserEditModalComponent
+    UserEditModalComponent,
+    ConfirmModalComponent
   ],
   imports: [
     BrowserModule,

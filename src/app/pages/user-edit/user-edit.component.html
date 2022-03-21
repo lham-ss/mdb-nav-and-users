@@ -40,11 +40,11 @@
                         <td>
                             <button class="call-btn btn btn-outline-primary btn-floating btn-sm"
                                 (click)="openUserEditModal(data)">
-                                <i class="fa fa-user"></i>
+                                <i class="far fa-edit"></i>
                             </button>
-                            <button class="messhandle-btn btn ms-2 btn-primary btn-floating btn-sm"
-                                (click)="logData(data.email)">
-                                <i class="fa fa-envelope"></i>
+                            <button class="messhandle-btn btn ms-2 btn-warning btn-floating btn-sm"
+                                (click)="deleteUserWithConfirmation(data)">
+                                <i class="far fa-trash-alt"></i>
                             </button>
                         </td>
                     </tr>

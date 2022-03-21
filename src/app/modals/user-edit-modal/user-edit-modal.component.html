@@ -1,5 +1,5 @@
-<div class="modal-header">
-    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+<div class="modal-header bg-info text-light">
+    <h5 class="modal-title">{{ modalTitle }}</h5>
     <button type="button" class="btn-close" aria-label="Close" (click)="close()"></button>
 </div>
 
@@ -7,16 +7,17 @@
 
     <form [formGroup]="userForm">
         <div class="row">
-
             <div class="col-md-6">
                 <mdb-form-control>
                     <input mdbValidate mdbInput type="text" id="form1" class="form-control" formControlName="firstName"
                         required />
                     <label mdbLabel class="form-label" for="form1">First name</label>
-                    <mdb-error *ngIf="firstName?.invalid && (firstName?.dirty || firstName?.touched)">First name is
-                        required
+                    <mdb-error *ngIf="firstName?.invalid && (firstName?.dirty || firstName?.touched)"><small>First name
+                            is required.</small>
                     </mdb-error>
-                    <mdb-success *ngIf="firstName?.valid && (firstName?.dirty || firstName?.touched)">Looks good!
+                    <mdb-success class="tweek-icon-margins"
+                        *ngIf="firstName?.valid && (firstName?.dirty || firstName?.touched)"><i
+                            class="far fa-thumbs-up"></i>
                     </mdb-success>
                 </mdb-form-control>
             </div>
@@ -26,22 +27,69 @@
                     <input mdbValidate mdbInput type="text" id="form2" class="form-control" formControlName="lastName"
                         required />
                     <label mdbLabel class="form-label" for="form2">Last name</label>
-                    <mdb-error *ngIf="lastName?.invalid && (lastName?.dirty || lastName?.touched)">Last name is required
+                    <mdb-error *ngIf="lastName?.invalid && (lastName?.dirty || lastName?.touched)"><small>Last name is
+                            required.</small>
                     </mdb-error>
-                    <mdb-success *ngIf="lastName?.valid && (lastName?.dirty || lastName?.touched)">Looks good!
+                    <mdb-success class="tweek-icon-margins"
+                        *ngIf="lastName?.valid && (lastName?.dirty || lastName?.touched)"><i
+                            class="far fa-thumbs-up"></i>
                     </mdb-success>
                 </mdb-form-control>
             </div>
+        </div>
 
+        <div class="row">
+            <div class="col-md-12">
+                <br>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <mdb-form-control>
+                    <input mdbValidate mdbInput type="text" id="formEmail" class="form-control" formControlName="email"
+                        required />
+                    <label mdbLabel class="form-label" for="formEmail">User Email address</label>
+                    <mdb-error *ngIf="email?.invalid && (email?.dirty || email?.touched)"><small>Email is
+                            required.</small>
+                    </mdb-error>
+                    <mdb-success class="tweek-icon-margins" *ngIf="email?.valid && (email?.dirty || email?.touched)"><i
+                            class="far fa-thumbs-up"></i>
+                    </mdb-success>
+                </mdb-form-control>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <br>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <mdb-form-control>
+                    <input mdbValidate mdbInput type="text" id="formPhoneNumber" class="form-control"
+                        formControlName="phoneNumber" required />
+                    <label mdbLabel class="form-label" for="formPhoneNumber">User Phone Number</label>
+                    <mdb-error *ngIf="phoneNumber?.invalid && (phoneNumber?.dirty || phoneNumber?.touched)"><small>Phone
+                            Number required.</small>
+                    </mdb-error>
+                    <mdb-success class="tweek-icon-margins"
+                        *ngIf="phoneNumber?.valid && (phoneNumber?.dirty || phoneNumber?.touched)"><i
+                            class="far fa-thumbs-up"></i>
+                    </mdb-success>
+                </mdb-form-control>
+            </div>
         </div>
     </form>
 
-    <br><br>
+    <br>
 </div>
 
 <div class="modal-footer">
     <button type="button" class="btn btn-secondary" (click)="close()">
         Close
     </button>
-    <button type="button" class="btn btn-primary">Save changes</button>
+    <button type="button" [disabled]="!userForm.valid" class="btn btn-primary" (click)="save()">Save changes</button>
 </div>
