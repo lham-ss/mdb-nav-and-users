@@ -3,10 +3,11 @@ import { Observable } from 'rxjs';
 import { delay, tap, map } from 'rxjs/operators';
 
 import { UserEditModalComponent } from 'src/app/modals/user-edit-modal/user-edit-modal.component';
-import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
-
-import { ApiService } from 'src/app/services/api.service';
 import { ConfirmModalComponent } from 'src/app/modals/confirm-modal/confirm-modal.component';
+
+import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
+import { ApiService } from 'src/app/services/api.service';
+
 
 export interface User {
   firstName: string;
@@ -56,13 +57,16 @@ export class UserEditComponent implements OnInit {
     this.confirmationModalRef = this.modals.open(ConfirmModalComponent, {
       data: {
         modalTitle: 'DELETE USER?',
-        modalBody: 'Please confirm that you wish to delete user: ' + user.firstName + '...',
+        modalBody: 'Please confirm that you wish to delete user ' + user.firstName + '...',
       }
     });
 
     this.confirmationModalRef.onClose.subscribe((result: any) => {
       if (result.confirmed) {
-        console.log('Deletion confirmed...  ')
+        this.api.deleteApi(`/user/${user.id}`).subscribe((res: any) => {
+          console.log(res.message);
+          this.reloadData();
+        });
       }
       else {
         console.log('Deletion not confirmed...')

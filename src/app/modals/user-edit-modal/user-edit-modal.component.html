@@ -82,10 +82,48 @@
                 </mdb-form-control>
             </div>
         </div>
-    </form>
 
+        <div class="row">
+            <div class="col-md-12">
+                <br>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <mdb-form-control>
+                    <input #pw mdbValidate mdbInput type="password" id="formNewPassword" class="form-control"
+                        aria-describedby="newPasswordText" autocomplete="new-password" formControlName="newPassword" />
+                    <label mdbLabel class="form-label" for="formNewPassword">Password</label>
+                </mdb-form-control>
+                <div class="col-auto">
+                    <span id="newPasswordText" class="form-text">
+                        <small *ngIf="createMode else editMode;">
+                            <span>&nbsp; Password must be at least 6 characters.</span>
+                            &nbsp;
+                        </small>
+                        <ng-template #editMode>
+                            <small>&nbsp; Enter a new password <b>OR</b> leave blank to keep the old password.
+                            </small>
+                            &nbsp;
+                        </ng-template>
+                        <button type="button" (click)="(pw.type = pw.type == 'password' ? 'text' : 'password')"
+                            class="btn bg-white btn-sm btn-floating text-muted">
+
+                            <span *ngIf="pw.type == 'password' else eyeIcon;" class="far fa-eye-slash"></span>
+
+                            <ng-template #eyeIcon>
+                                <span class="far fa-eye"></span>
+                            </ng-template>
+                        </button>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </form>
     <br>
 </div>
+
 
 <div class="modal-footer">
     <button type="button" class="btn btn-secondary" (click)="close()">

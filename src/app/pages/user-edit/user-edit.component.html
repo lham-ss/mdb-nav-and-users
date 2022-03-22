@@ -1,7 +1,13 @@
 <div class="wrapper">
     <div class="datatable mt-4">
-        <div class="datatable-inner" mdbScrollbar style="position: relative">
 
+        <button class="call-btn btn btn-outline-success btn-floating btn-sm float-end"
+            (click)="openUserEditModal(null);">
+            <i class="fas fa-plus-circle"></i>
+        </button>
+
+
+        <div class="datatable-inner" mdbScrollbar style="position: relative">
             <table class="table datatable-table" mdbTable mdbTableSort #table="mdbTable" #sort="mdbTableSort"
                 [dataSource]="dataSource$ | async" [responsive]="true" [pagination]="pagination" [sort]="sort">
 
@@ -38,11 +44,11 @@
                             </ng-template>
                         </td>
                         <td>
-                            <button class="call-btn btn btn-outline-primary btn-floating btn-sm"
+                            <button class="btn btn-outline-primary btn-floating btn-sm"
                                 (click)="openUserEditModal(data)">
                                 <i class="far fa-edit"></i>
                             </button>
-                            <button class="messhandle-btn btn ms-2 btn-warning btn-floating btn-sm"
+                            <button class="btn ms-2 btn-warning btn-floating btn-sm"
                                 (click)="deleteUserWithConfirmation(data)">
                                 <i class="far fa-trash-alt"></i>
                             </button>

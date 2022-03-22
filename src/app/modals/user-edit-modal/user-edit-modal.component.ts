@@ -12,6 +12,7 @@ export class UserEditModalComponent implements OnInit {
   user: any | null = null;
   modalTitle: string = 'Editing Account';
   userForm: FormGroup;
+  createMode: boolean = false;
 
   constructor(
     public modalRef: MdbModalRef<UserEditModalComponent>,
@@ -40,17 +41,22 @@ export class UserEditModalComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.user) {
-
+      this.userForm.addControl("newPassword", new FormControl(null, { updateOn: 'change' }));
       this.userForm.setValue({
         "firstName": this.user.firstName ?? "",
         "lastName": this.user.lastName ?? "",
         "email": this.user.email ?? "",
         "phoneNumber": this.user.phoneNumber ?? "505-555-1212",
+        "newPassword": "",
       });
-
     }
     else {
+      this.createMode = true;
       this.modalTitle = 'Create Account';
+      this.userForm.addControl('newPassword', new FormControl(null, {
+        validators: [Validators.required, Validators.minLength(6)],
+        updateOn: 'change'
+      }));
     }
   }
 
@@ -68,6 +74,10 @@ export class UserEditModalComponent implements OnInit {
 
   get phoneNumber(): AbstractControl {
     return this.userForm?.get('phoneNumber')!;
+  }
+
+  get newPassword(): AbstractControl {
+    return this.userForm?.get('newPassword')!;
   }
 
 
