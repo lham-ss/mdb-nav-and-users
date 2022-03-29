@@ -3,6 +3,14 @@
 @import '~@fortawesome/fontawesome-free/scss/solid.scss';
 @import '~@fortawesome/fontawesome-free/scss/regular.scss';
 @import '~@fortawesome/fontawesome-free/scss/brands.scss';
+
+// Theme colors
+$primary: #aec2e0 !default;
+$secondary: #59c281 !default;
+$success: #16552f !default;
+$info: #6baec5 !default;
+$warning: #d8af5e !default;
+$danger: #971228 !default;
  
 @import '~mdb-angular-ui-kit/assets/scss/mdb.scss';
 

@@ -5,20 +5,24 @@
 
 <div class="modal-body">
 
-    <form [formGroup]="userForm">
+    <form [formGroup]="userForm" method="GET" autocomplete="off">
         <div class="row">
             <div class="col-md-6">
                 <mdb-form-control>
                     <input mdbValidate mdbInput type="text" id="form1" class="form-control" formControlName="firstName"
                         required />
                     <label mdbLabel class="form-label" for="form1">First name</label>
-                    <mdb-error *ngIf="firstName?.invalid && (firstName?.dirty || firstName?.touched)"><small>First name
-                            is required.</small>
+
+                    <mdb-error *ngIf="firstName?.invalid && (firstName?.dirty || firstName?.touched)">
+                        <small>First name is required.</small>
                     </mdb-error>
+
+                    <!--
                     <mdb-success class="tweek-icon-margins"
                         *ngIf="firstName?.valid && (firstName?.dirty || firstName?.touched)"><i
                             class="far fa-thumbs-up"></i>
                     </mdb-success>
+                    -->
                 </mdb-form-control>
             </div>
 
@@ -27,13 +31,17 @@
                     <input mdbValidate mdbInput type="text" id="form2" class="form-control" formControlName="lastName"
                         required />
                     <label mdbLabel class="form-label" for="form2">Last name</label>
-                    <mdb-error *ngIf="lastName?.invalid && (lastName?.dirty || lastName?.touched)"><small>Last name is
-                            required.</small>
+
+                    <mdb-error *ngIf="lastName?.invalid && (lastName?.dirty || lastName?.touched)">
+                        <small>Last name is required.</small>
                     </mdb-error>
+
+                    <!--
                     <mdb-success class="tweek-icon-margins"
                         *ngIf="lastName?.valid && (lastName?.dirty || lastName?.touched)"><i
                             class="far fa-thumbs-up"></i>
                     </mdb-success>
+                    -->
                 </mdb-form-control>
             </div>
         </div>
@@ -47,14 +55,16 @@
         <div class="row">
             <div class="col-md-12">
                 <mdb-form-control>
-                    <input mdbValidate mdbInput type="text" id="formEmail" class="form-control" formControlName="email"
-                        required />
+                    <input autocomplete="off" mdbValidate mdbInput type="text" id="formEmail" class="form-control"
+                        formControlName="email" required />
                     <label mdbLabel class="form-label" for="formEmail">User Email address</label>
-                    <mdb-error *ngIf="email?.invalid && (email?.dirty || email?.touched)"><small>Email is
-                            required.</small>
+
+                    <mdb-error *ngIf="email?.invalid && (email?.dirty || email?.touched)">
+                        <small>Email is required.</small>
                     </mdb-error>
-                    <mdb-success class="tweek-icon-margins" *ngIf="email?.valid && (email?.dirty || email?.touched)"><i
-                            class="far fa-thumbs-up"></i>
+
+                    <mdb-success class="tweek-icon-margins" *ngIf="email?.valid && (email?.dirty || email?.touched)">
+                        <i class="far fa-thumbs-up"></i>
                     </mdb-success>
                 </mdb-form-control>
             </div>
@@ -72,12 +82,14 @@
                     <input mdbValidate mdbInput type="text" id="formPhoneNumber" class="form-control"
                         formControlName="phoneNumber" required />
                     <label mdbLabel class="form-label" for="formPhoneNumber">User Phone Number</label>
-                    <mdb-error *ngIf="phoneNumber?.invalid && (phoneNumber?.dirty || phoneNumber?.touched)"><small>Phone
-                            Number required.</small>
+
+                    <mdb-error *ngIf="phoneNumber?.invalid && (phoneNumber?.dirty || phoneNumber?.touched)">
+                        <small>Phone Number required.</small>
                     </mdb-error>
+
                     <mdb-success class="tweek-icon-margins"
-                        *ngIf="phoneNumber?.valid && (phoneNumber?.dirty || phoneNumber?.touched)"><i
-                            class="far fa-thumbs-up"></i>
+                        *ngIf="phoneNumber?.valid && (phoneNumber?.dirty || phoneNumber?.touched)">
+                        <i class="far fa-thumbs-up"></i>
                     </mdb-success>
                 </mdb-form-control>
             </div>
@@ -92,32 +104,30 @@
         <div class="row">
             <div class="col-md-12">
                 <mdb-form-control>
-                    <input #pw mdbValidate mdbInput type="password" id="formNewPassword" class="form-control"
-                        aria-describedby="newPasswordText" autocomplete="new-password" formControlName="newPassword" />
+                    <input #pw autocomplete="new-password" mdbValidate mdbInput type="password" id="formNewPassword"
+                        class="form-control" aria-describedby="newPasswordText" formControlName="newPassword" />
                     <label mdbLabel class="form-label" for="formNewPassword">Password</label>
                 </mdb-form-control>
+
                 <div class="col-auto">
                     <span id="newPasswordText" class="form-text">
                         <small *ngIf="createMode else editMode;">
-                            <span>&nbsp; Password must be at least 6 characters.</span>
-                            &nbsp;
+                            <span>&nbsp; Password must be at least 6 characters.</span> &nbsp;
                         </small>
+
                         <ng-template #editMode>
-                            <small>&nbsp; Enter a new password <b>OR</b> leave blank to keep the old password.
-                            </small>
+                            <small>&nbsp; Enter a new password <b>OR</b> leave blank to keep the old password.</small>
                             &nbsp;
                         </ng-template>
+
                         <button type="button" (click)="(pw.type = pw.type == 'password' ? 'text' : 'password')"
                             class="btn bg-white btn-sm btn-floating text-muted">
-
                             <span *ngIf="pw.type == 'password' else eyeIcon;" class="far fa-eye-slash"></span>
-
-                            <ng-template #eyeIcon>
-                                <span class="far fa-eye"></span>
-                            </ng-template>
+                            <ng-template #eyeIcon><span class="far fa-eye"></span></ng-template>
                         </button>
                     </span>
                 </div>
+
             </div>
         </div>
     </form>

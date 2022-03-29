@@ -18,7 +18,10 @@
                 <input #pw type="password" placeholder="Enter your Password" required formControlName="password"
                     class="form-control">
                 <button type="button" (click)="(pw.type = pw.type == 'password' ? 'text' : 'password')"
-                    class="btn bg-white text-muted"> <span class="far fa-eye-slash"></span> </button>
+                    class="btn bg-white btn-sm text-muted">
+                    <span *ngIf="pw.type == 'password' else eyeIcon;" class="far fa-eye-slash"></span>
+                    <ng-template #eyeIcon><span class="far fa-eye"></span></ng-template>
+                </button>
             </div>
         </div>
 

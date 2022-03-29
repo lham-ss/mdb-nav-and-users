@@ -4,6 +4,7 @@ import { AdminGuard } from './guards/admin.guard';
 import { LoggedInGuard } from './guards/logged-in.guard';
 import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
+import { SmsTargetsComponent } from './pages/sms-targets/sms-targets.component';
 import { UserEditComponent } from './pages/user-edit/user-edit.component';
 
 const routes: Routes = [
@@ -19,6 +20,11 @@ const routes: Routes = [
   {
     path: 'users',
     component: UserEditComponent,
+    canActivate: [LoggedInGuard, AdminGuard]
+  },
+  {
+    path: 'sms-targets',
+    component: SmsTargetsComponent,
     canActivate: [LoggedInGuard, AdminGuard]
   },
   {
