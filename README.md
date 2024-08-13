@@ -1,6 +1,6 @@
 # MdbNavLoginWithUsersAndRoles
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.16.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.16 to test out MDB as a UI kit.
 
 ## Development server
 
